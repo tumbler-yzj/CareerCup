@@ -1,3 +1,5 @@
+/*Implement an algorithm to determine if a string has all unique characters. 
+  What if you can not use additional data structures?*/
 #include <iostream>
 #include <string.h>
 #include <bitset>
@@ -48,7 +50,7 @@ bool isUnique(char* hashtable, const char* string) {
 		
 }
 
-//We will assume, in the below code, that the string is only lower case ¡®a¡¯ through ¡®z¡¯. 
+//We will assume, in the below code, that the string is only lower case ï¿½ï¿½aï¿½ï¿½ through ï¿½ï¿½zï¿½ï¿½. 
 //This will allow us to use just a single int
 bool isUnique2(const char* string) {
 	int checker = 0;
