@@ -46,10 +46,34 @@ string remove2(char* str) {
 	return temp;
 }
 
-int main() {
-	char str[] ="abbccccccccd";
+//with additonal memory of constant size
+string remove3(char* str) {
+	if(str == NULL) return str;
+	int len = strlen(str);
+	if(len < 2) return str;
 	
-	cout << remove2(str) << endl;
+	int i;
+	bool* hit = new bool[256];
+	for(i = 0; i < 256; i++) {
+		hit[i] = false;
+	}
+	hit[str[0]] = true;
+	int j = 1;
+	for(i = 1; i < len; i++) {
+		if(!hit[str[i]]) {
+			str[j] = str[i];
+			hit[str[i]] = true;
+			j++;
+		}
+	}
+	str[j] = '\0';
+	return str;
+}
+
+int main() {
+	char str[] ="abbccccccccde";
+	
+	cout << remove3(str) << endl;
 	system("pause");
 	return 0;
 }
