@@ -9,6 +9,7 @@
 using namespace std;
 
 char* remove(char* str) {
+	if(str == NULL) return "null string";
 	int i, j;
 	sort(str, str + strlen(str));
 //	cout << "after sort\n";
@@ -26,6 +27,7 @@ char* remove(char* str) {
 }
 
 string remove2(char* str) {
+	if(str == NULL) return "null string";
 	int i, j;
 	bool flg = false;
 	string temp;
@@ -46,10 +48,46 @@ string remove2(char* str) {
 	return temp;
 }
 
-int main() {
-	char str[] ="abbccccccccd";
+//with additonal memory of constant size
+string remove3(char* str) {
+	if(str == NULL) return "null string";
+	int len = strlen(str);
+	if(len < 2) return str;
 	
-	cout << remove2(str) << endl;
+	int i;
+	bool* hit = new bool[256];
+	for(i = 0; i < 256; i++) {
+		hit[i] = false;
+	}
+	hit[str[0]] = true;
+	int j = 1;
+	for(i = 1; i < len; i++) {
+		if(!hit[str[i]]) {
+			str[j] = str[i];
+			hit[str[i]] = true;
+			j++;
+		}
+	}
+	str[j] = '\0';
+	return str;
+}
+
+int main() {
+	char str[] ="ababababa";
+	//char* str = NULL;
+	cout << "remove1: " << remove(str) << endl;
+	cout << "remove2: " << remove2(str) <<endl;
+ 	cout << "remove3: " << remove3(str) << endl;
 	system("pause");
 	return 0;
 }
+
+/*
+Test Cases:
+1. String does not contain any duplicates, e.g.: abcd
+2. String contains all duplicates, e.g.: aaaa
+3. Null string
+4. Empty string
+5. String with all continuous duplicates, e.g.: aaabbb
+6. String with non-contiguous duplicates, e.g.: abababa
+*/
