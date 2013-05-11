@@ -12,28 +12,35 @@ struct LinkListNode{
 
 typedef LinkListNode* LinkList;
 
-LinkList createLinkList(void) {
-	 char ch;
-	 LinkListNode* T; //工作指针
+LinkList createLinkList(char node[], int n) {
 	 LinkList head;
 	 head = NULL;
-	 cin >> ch;
-	 while(ch != '\n') {
-	 	T = (LinkListNode*)malloc(sizeof(LinkListNode));
-	 	T->key = ch;
-	 	T->pNext = NULL;
+	 LinkListNode* T; //工作指针
+
+	 for(int i = n-1; i >= 0; i--) {
+	 	T = new LinkListNode();
+	 	T->key = node[i];
+	 	T->pNext = head;
 	 	head = T;
-	 	cin >> ch;
-	 } 
+	 }
 	 return head;
 }
 
-int main() {
-	LinkList l = createLinkList();
-	while(l->pNext != NULL) {
-		cout << l->key << " ";
-		l = l->pNext;
+void printLinkList(LinkList list) {
+	LinkListNode* temp = list;
+	while(temp != NULL) {
+		cout << temp->key << " ";
+		temp = temp->pNext;	
 	}
+}
+
+int main() {
+	const int N = 5;
+	char node[N] = { 'a', 'b', 'c', 'd', 'e'};
+	LinkList l = createLinkList(node, 5);
+	
+	printLinkList(l);
+	
 	system("pause");
 	return 0;
 }
