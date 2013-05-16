@@ -6,29 +6,30 @@ using namespace std;
 #include <iostream>
 #include <cstdlib>
 
+template <typename T>
 struct LinkListNode{
-	int key;
-	LinkListNode *pNext;
+	T key;
+	LinkListNode<T>* pNext; 
 };
 
-typedef LinkListNode* LinkList;
+//typedef LinkListNode<typename T>* LinkLtist;
 
-LinkList createLinkList(char node[], int n) {
-	 LinkList head;
+template <typename T> LinkListNode<T>* createLinkList(T node[], int n) {
+	 LinkListNode<T>* head;
 	 head = NULL;
-	 LinkListNode* T; //工作指针
+	 LinkListNode<T>* s; //工作指针
 
 	 for(int i = n-1; i >= 0; i--) {
-	 	T = new LinkListNode();
-	 	T->key = node[i];
-	 	T->pNext = head;
-	 	head = T;
+	 	s = new LinkListNode<T>();
+	 	s->key = node[i];
+	 	s->pNext = head;
+	 	head = s;
 	 }
 	 return head;
 }
 
-void printLinkList(LinkList list) {
-	LinkListNode* temp = list;
+template <typename T> void printLinkList(LinkListNode<T>* list) {
+	LinkListNode<T>* temp = list;
 	while(temp != NULL) {
 		cout << temp->key << " ";
 		temp = temp->pNext;	
